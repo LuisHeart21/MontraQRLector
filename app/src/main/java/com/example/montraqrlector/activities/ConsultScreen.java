@@ -3,6 +3,7 @@ package com.example.montraqrlector.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.montraqrlector.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.montraqrlector.adapters.PeopleAdapter;
 import com.example.montraqrlector.models.IGoogleSheets;
 import com.example.montraqrlector.models.People;
 import com.example.montraqrlector.utilies.Common;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,13 +71,24 @@ public class ConsultScreen extends AppCompatActivity {
 
                         for (int i = 0; i < peopleArray.length(); i++) {
                             JSONObject object = peopleArray.getJSONObject(i);
-                            String id = object.getString("id");
-                            String name = object.getString("nombre");
-                            String surname = object.getString("apellido");
-                            String age = object.getString("edad");
 
-                            People people = new People(id, name, surname, age);
+                            String id = object.getString("Id");
+                            String lectura = object.getString("Lectura");
+                            String qrscan = object.getString("QrScan");
+                            String name = object.getString("Nombre");
+                            String empresa = object.getString("Empresa");
+                            String tel1 = object.getString("telefono1");
+                            String tel2 = object.getString("telefono2");
+                            String correo1 = object.getString("correo1");
+                            String correo2 = object.getString("correo2");
+                            String informacion = object.getString("Informacion");
+                            String comentarios = object.getString("Comentarios");
+                            String agrx = object.getString("Agregadox");
+
+
+                            People people = new People(id,lectura,qrscan,name,empresa,tel1,tel2,correo1,correo2,informacion,comentarios,agrx);
                             peopleList.add(people);
+                            Log.e("people",id);
 
                             setPeopleAdapter(peopleList);
                             progressDialog.dismiss();

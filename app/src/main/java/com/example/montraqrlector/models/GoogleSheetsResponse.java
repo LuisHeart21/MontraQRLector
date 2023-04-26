@@ -9,7 +9,7 @@ public class GoogleSheetsResponse {
     public static Retrofit getClientGetMethod(String baseUrl) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
+                        .baseUrl(baseUrl)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build();
         }
