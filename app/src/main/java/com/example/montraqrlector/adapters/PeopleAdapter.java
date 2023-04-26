@@ -34,10 +34,9 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
     public void onBindViewHolder(@NonNull PeopleViewHolder holder, int position) {
         People pos = peopleList.get(holder.getAdapterPosition());
 
-        String full_name = pos.getName() + " " + pos.getSurname();
         holder.tId.setText(pos.getId());
-        holder.tFullName.setText(full_name);
-        holder.tAge.setText(pos.getAge());
+        holder.tFullName.setText(pos.getName());
+        holder.tLectura.setText(pos.getLectura());
 
     }
 
@@ -47,13 +46,13 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
     }
 
     public static class PeopleViewHolder extends RecyclerView.ViewHolder {
-        TextView tId, tFullName, tAge;
+        TextView tId, tFullName, tLectura;
 
         public PeopleViewHolder(@NonNull View itemView) {
             super(itemView);
             tId = itemView.findViewById(R.id.tvId);
             tFullName = itemView.findViewById(R.id.tvFullName);
-            tAge = itemView.findViewById(R.id.tvAge);
+            tLectura = itemView.findViewById(R.id.tvLectura);
         }
     }
 }
