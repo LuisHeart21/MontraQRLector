@@ -27,6 +27,7 @@ public class RegisterScreen extends AppCompatActivity {
     AppCompatButton btnRegister;
 
     int lastId;
+    String qrLectura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_register_screen);
 
+        etLectura = findViewById(R.id.et_qrscan);
         etqrsan = findViewById(R.id.et_qrscan);
         etName = findViewById(R.id.et_name);
         etEmpresa = findViewById(R.id.et_empresar);
@@ -47,6 +49,10 @@ public class RegisterScreen extends AppCompatActivity {
         btnRegister = findViewById(R.id.btn_register);
 
         lastId = getIntent().getIntExtra("count", 0);
+        qrLectura= getIntent().getStringExtra("qr");
+        Log.e("datos",lastId+" "+qrLectura);
+        etqrsan.setText(qrLectura);
+
 
         btnRegister.setOnClickListener(v -> registerPerson());
     }
@@ -70,7 +76,6 @@ public class RegisterScreen extends AppCompatActivity {
         String agrx = etAgrx.getText().toString();
         String lecturar = Fecha.obtenerFechaActual("America/Mexico_City") + "  " + Fecha.obtenerHoraActual("America/Mexico_City");
 
-        Log.e("imp",correo2);
         lecturar = DatoNullo(lecturar);
         name = DatoNullo(name);
         qrscan = DatoNullo(qrscan);
