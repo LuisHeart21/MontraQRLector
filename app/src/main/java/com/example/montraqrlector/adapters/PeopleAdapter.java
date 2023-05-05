@@ -37,7 +37,9 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
         holder.tId.setText(pos.getId());
         holder.tFullName.setText(pos.getName());
         holder.tLectura.setText(pos.getLectura());
-
+        holder.tQR.setText(pos.getQrscan());
+        holder.tempresa.setText((pos.getEmpresa()));
+        holder.tinformacion.setText(pos.getInformacion());
     }
 
     @Override
@@ -46,13 +48,16 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.PeopleView
     }
 
     public static class PeopleViewHolder extends RecyclerView.ViewHolder {
-        TextView tId, tFullName, tLectura;
+        TextView tId, tFullName, tLectura, tQR, tempresa, tinformacion;
 
         public PeopleViewHolder(@NonNull View itemView) {
             super(itemView);
             tId = itemView.findViewById(R.id.tvId);
             tFullName = itemView.findViewById(R.id.tvFullName);
             tLectura = itemView.findViewById(R.id.tvLectura);
+            tQR = itemView.findViewById(R.id.tvQRScan);
+            tempresa = itemView.findViewById(R.id.tvEmpresa);
+            tinformacion = itemView.findViewById(R.id.tvInfo);
         }
     }
 }

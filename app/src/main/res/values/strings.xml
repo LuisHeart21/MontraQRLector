@@ -1,18 +1,19 @@
 <resources>
     <string name="app_name">MontraQRLector</string>
     <string name="todo">TODO</string>
-    <string name="txt_qrscan">QRScan</string>
-    <string name="txt_name">Nombre</string>
+    <string name="txt_qrscan">QR: </string>
+    <string name="txt_name">Nombre: </string>
     <string name="txt_id">ID</string>
-    <string name="txt_phone1">Nro de teléfono 1</string>
-    <string name="txt_phone2">Nro de teléfono 2</string>
-    <string name="txt_email1">Correo electrónico 1</string>
-    <string name="txt_email2">Correo electrónico 2</string>
-    <string name="txt_empresa">Empresa</string>
-    <string name="txt_info">Información</string>
+    <string name="txt_phone1">Número de teléfono 1: </string>
+    <string name="txt_phone2">Número de teléfono 2: </string>
+    <string name="txt_email1">Correo electrónico 1: </string>
+    <string name="txt_email2">Correo electrónico 2: </string>
+    <string name="txt_empresa">Empresa: </string>
+    <string name="txt_info">Información: </string>
     <string name="txt_coment">Comentarios</string>
     <string name="txt_agrx">Agregado por:</string>
-    <string name="txt_addPerson">Agregar nueva persona</string>
-    <string name="txt_register">Registrar</string>
-    <string name="txt_lectura">LecturaFecha:</string>
+    <string name="txt_addPerson">Registro Interesado</string>
+    <string name="txt_register"> Registrar </string>
+    <string name="txt_lectura">Fecha Escaneo:</string>
+    <string name="list_info"> Información de: </string>
 </resources>

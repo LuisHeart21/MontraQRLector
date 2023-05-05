@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/red"
             android:textSize="26sp"
             android:textStyle="bold"
             tools:text="1" />
@@ -51,6 +51,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/txt_qrscan"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvQRScan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/grisoscuro"
+                    android:textSize="18sp"
+                    tools:text="NumberQr" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/txt_lectura"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -60,9 +81,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grisoscuro"
                     android:textSize="18sp"
-                    tools:text="NumberQr" />
+                    tools:text="Hora de Escaneo" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -81,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grisoscuro"
                     android:textSize="18sp"
                     tools:text="Empresa" />
             </LinearLayout>
@@ -102,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/grisoscuro"
                     android:textSize="18sp"
                     tools:text="Informacion" />
             </LinearLayout>

@@ -4,39 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grisclaro"
-    tools:context=".activities.ConsultScreen">
+    tools:context=".activities.ConsultScreen"
+    android:background="@color/grisclaro">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_people"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_person" />
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        >
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_register"
+            android:layout_width="141dp"
+            android:layout_height="157dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/purple_500"
+            android:src="@drawable/ic_add"
+            android:contentDescription="Agregar Persona"
+            android:tint="@color/white" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_register"
-        android:layout_width="141dp"
-        android:layout_height="157dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/purple_500"
-        android:src="@drawable/ic_add"
-        android:tint="@color/white" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_QR"
+            android:layout_width="189dp"
+            android:layout_height="189dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="Escanear QR"
+            android:src="@drawable/escanmontra"
+            app:fabCustomSize="90dp"
+            app:maxImageSize="80dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_QR"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/escanmontra"
-        app:fabCustomSize="80dp"
-        app:maxImageSize="65dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            android:text="Escanear QR"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlnointernet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginBottom="120dp"
+        android:visibility="invisible">
+        <ImageView
+            android:id="@+id/imgewifi"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@drawable/errorwifi"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:tint="@color/red"
+            />
+        <TextView
+            android:id="@+id/txtnocennection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sin conexión a Internet"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/imgewifi"
+            android:textSize="30dp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/btnrefresh"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text=" Reintentar "
+            android:textStyle="bold"
+            android:background="@drawable/bg_button"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txtnocennection"
+            android:layout_margin="50dp"
+            android:textSize="30dp"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlshowpeople"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="120dp"
+        android:background="@color/red"
+        android:visibility="visible">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_people"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_person" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

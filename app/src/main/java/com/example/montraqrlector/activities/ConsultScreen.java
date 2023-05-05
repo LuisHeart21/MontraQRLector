@@ -1,9 +1,13 @@
 package com.example.montraqrlector.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,25 +41,49 @@ public class ConsultScreen extends AppCompatActivity {
     private List<People> peopleList;
     private RecyclerView recyclerPeople;
     ProgressDialog progressDialog;
-
     FloatingActionButton fab,fabQR;
+    Context context;
+    Button coneccionreint;
 
     int size = 0;
+
+    private RelativeLayout rlinternet, rlnointernet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult);
 
-        recyclerPeople = findViewById(R.id.recycler_people);
+        rlnointernet = findViewById(R.id.rlnointernet);
+        rlinternet = findViewById(R.id.rlshowpeople);
 
         fab = findViewById(R.id.fab_register);
         fabQR = findViewById(R.id.fab_QR);
 
-        peopleList = new ArrayList<>();
+        coneccionreint = findViewById(R.id.btnrefresh);
 
-        iGoogleSheets = Common.iGSGetMethodClient(Common.BASE_URL);
-        loadDataFromGoogleSheets();
+        coneccionreint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        if(!isConnected()){
+            rlnointernet.setVisibility(View.VISIBLE);
+            rlinternet.setVisibility(View.INVISIBLE);
+
+            goToRegisterScreen();
+            goToRegisterScreenQr();
+        }
+        else{
+            recyclerPeople = findViewById(R.id.recycler_people);
+
+            peopleList = new ArrayList<>();
+
+            iGoogleSheets = Common.iGSGetMethodClient(Common.BASE_URL);
+            loadDataFromGoogleSheets();
+        }
     }
 
     private void loadDataFromGoogleSheets() {
@@ -64,7 +92,7 @@ public class ConsultScreen extends AppCompatActivity {
                 "Cargando resultados",
                 "Espere por favor",
                 true,
-                false);
+                true);
 
         try {
             pathUrl = "exec?spreadsheetId=" + Common.GOOGLE_SHEET_ID + "&sheet=" + Common.SHEET_NAME;
@@ -161,7 +189,7 @@ public class ConsultScreen extends AppCompatActivity {
             if(result.getContents() == null){
                 Toast.makeText(this,"Lectora cancelada", Toast.LENGTH_LONG).show();
             }else{
-                Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
                 //Log.e("Qr result",result.toString());
                 Intent intent = new Intent(ConsultScreen.this,RegisterScreen.class);
                 intent.putExtra("count",size);
@@ -172,5 +200,11 @@ public class ConsultScreen extends AppCompatActivity {
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private boolean isConnected(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo()!= null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 }

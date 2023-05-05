@@ -18,7 +18,7 @@ public class People {
     String correo2, String informacion, String comentarios, String agrx) {
         this.lectura = lectura;
         this.id = id;
-        this. qrscan = qrscan;
+        this.qrscan = qrscan;
         this.name = name;
         this.empresa = empresa;
         this.tel1 = tel1;
@@ -36,9 +36,7 @@ public class People {
     public String getId() {
         return id;
     }
-    public String getQrscan() {
-        return qrscan;
-    }
+    public String getQrscan() { return qrscan;}
     public String getName() {
         return name;
     }
