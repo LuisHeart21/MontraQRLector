@@ -238,7 +238,7 @@ public class RegisterScreen extends AppCompatActivity {
         Log.e("escribe","minimo");
         try
         {
-            File root = new File(Environment.getExternalStorageDirectory(),"Documents");
+            File root = new File(Environment.getExternalStorageDirectory(),Environment.DIRECTORY_DOCUMENTS);
             if (!root.exists())
             {
                 root.mkdir();

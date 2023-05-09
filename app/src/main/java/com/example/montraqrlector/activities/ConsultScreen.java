@@ -65,10 +65,18 @@ public class ConsultScreen extends AppCompatActivity {
         coneccionreint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
+                progressDialog = ProgressDialog.show(ConsultScreen.this,
+                        "Esperando conexión",
+                        "Espere por favor",
+                        true,
+                        true);
+                isConnected();
+                recreate();
+                //finish();
+                //startActivity(getIntent());
             }
         });
+
         if(!isConnected()){
             rlnointernet.setVisibility(View.VISIBLE);
             rlinternet.setVisibility(View.INVISIBLE);
@@ -84,6 +92,8 @@ public class ConsultScreen extends AppCompatActivity {
             iGoogleSheets = Common.iGSGetMethodClient(Common.BASE_URL);
             loadDataFromGoogleSheets();
         }
+
+
     }
 
     private void loadDataFromGoogleSheets() {
