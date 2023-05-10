@@ -41,7 +41,7 @@ public class ConsultScreen extends AppCompatActivity {
     private List<People> peopleList;
     private RecyclerView recyclerPeople;
     ProgressDialog progressDialog;
-    FloatingActionButton fab,fabQR;
+    FloatingActionButton fab,fabQR,bdlocal;
     Context context;
     Button coneccionreint;
 
@@ -59,8 +59,17 @@ public class ConsultScreen extends AppCompatActivity {
 
         fab = findViewById(R.id.fab_register);
         fabQR = findViewById(R.id.fab_QR);
+        bdlocal = findViewById(R.id.fab_bdlocal);
 
         coneccionreint = findViewById(R.id.btnrefresh);
+
+        bdlocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ConsultScreen.this,LocalBaseDataActivity.class));
+            }
+        });
 
         coneccionreint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +79,6 @@ public class ConsultScreen extends AppCompatActivity {
                         "Espere por favor",
                         true,
                         true);
-                isConnected();
                 recreate();
                 //finish();
                 //startActivity(getIntent());
@@ -173,6 +181,7 @@ public class ConsultScreen extends AppCompatActivity {
                 .putExtra("count", size)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)));
     }
+
 
     private void  goToRegisterScreenQr(){
         fabQR.setOnClickListener(new View.OnClickListener() {

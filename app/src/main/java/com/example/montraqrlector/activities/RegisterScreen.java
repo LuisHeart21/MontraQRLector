@@ -8,7 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -235,7 +238,6 @@ public class RegisterScreen extends AppCompatActivity {
     }
 
     public void WriteToFile( String sFileName, String sBody) {
-        Log.e("escribe","minimo");
         try
         {
             File root = new File(Environment.getExternalStorageDirectory(),Environment.DIRECTORY_DOCUMENTS);
@@ -245,13 +247,12 @@ public class RegisterScreen extends AppCompatActivity {
             }
             File gpxfile = new File(root, sFileName);
 
-            Log.e("escribe2","minimo2");
-
             FileWriter writer = new FileWriter(gpxfile,true);
             writer.append(sBody+"\n\n");
             writer.flush();
             writer.close();
-            Toast.makeText(this, "Datos Guardados en Archivo Local", Toast.LENGTH_SHORT).show();
+            guardadocorrecto();
+            //Toast.makeText(this, "Datos Guardados en Archivo Local", Toast.LENGTH_SHORT).show();
         }
         catch(IOException e)
         {
@@ -264,6 +265,17 @@ public class RegisterScreen extends AppCompatActivity {
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo()!= null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
+    private void guardadocorrecto(){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.layoutbasedatalocal, (ViewGroup) findViewById(R.id.ll_toast));
+
+        Toast toast = new Toast((getApplicationContext()));
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0,200);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(view);
+        toast.show();
     }
 
 }

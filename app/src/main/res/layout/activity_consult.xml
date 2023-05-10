@@ -40,6 +40,21 @@
             app:fabCustomSize="90dp"
             app:maxImageSize="80dp" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_bdlocal"
+            android:layout_width="141dp"
+            android:layout_height="157dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="@color/purple_500"
+            android:src="@drawable/homedatabase"
+            android:contentDescription="Agregar Persona"
+            android:tint="@color/white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
