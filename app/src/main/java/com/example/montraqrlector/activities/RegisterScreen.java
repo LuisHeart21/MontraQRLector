@@ -6,13 +6,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -26,10 +23,6 @@ import com.example.montraqrlector.models.IGoogleSheets;
 import com.example.montraqrlector.utilies.Common;
 import com.example.montraqrlector.utilies.Fecha;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -37,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RegisterScreen extends AppCompatActivity {
-    EditText etLectura, etqrsan, etName, etEmpresa, etTel1, etTel2, etCorreo1, etCorreo2, etComentarios, etAgrx;
+    EditText etqrsan, etName, etEmpresa, etTel1, etTel2, etCorreo1, etCorreo2, etComentarios, etAgrx;
 
     String[] items_info = {"Cubiscan - Dimensionamiento y Pesaje",
             "Wipotec - OCS pesaje dinámico de alta precisión",
@@ -51,9 +44,11 @@ public class RegisterScreen extends AppCompatActivity {
     AppCompatButton btnRegister;
 
     int lastId;
-    String qrLectura, item = "General", total_info_txt, fileName = "registroBD.txt";
+    String qrLectura, item = "General";
 
     Context context;
+
+    DBHelper db;
 
 
     @Override
@@ -62,7 +57,6 @@ public class RegisterScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_register_screen);
 
-        etLectura = findViewById(R.id.et_qrscan);
         etqrsan = findViewById(R.id.et_qrscan);
         etName = findViewById(R.id.et_name);
         etEmpresa = findViewById(R.id.et_empresar);
@@ -75,22 +69,20 @@ public class RegisterScreen extends AppCompatActivity {
         btnRegister = findViewById(R.id.btn_register);
 
         autoCompleteText = findViewById(R.id.dsp_info);
-        adapterItems = new ArrayAdapter<String>(this,R.layout.list_item,items_info);
+
+        adapterItems = new ArrayAdapter<>(this,R.layout.list_item,items_info);
         autoCompleteText.setAdapter(adapterItems);
-        autoCompleteText.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                item = adapterView.getItemAtPosition(position).toString();
-            }
-        });
+        autoCompleteText.setOnItemClickListener((adapterView, view, position, id) -> item = adapterView.getItemAtPosition(position).toString());
 
         lastId = getIntent().getIntExtra("count", 0);
         qrLectura= getIntent().getStringExtra("qr");
-        Log.e("datos",lastId+" "+qrLectura);
+        //Log.e("datos",lastId+" "+qrLectura);
         etqrsan.setText(qrLectura);
 
+        db = new DBHelper(this);
 
         btnRegister.setOnClickListener(v -> registerPerson());
+
     }
 
 
@@ -138,7 +130,7 @@ public class RegisterScreen extends AppCompatActivity {
 
         if(!isConnected()){
             //Sin internet
-            total_info_txt = "--"+"/"
+            /*total_info_txt = "--"+"/"
                     +finalLecturar+"/"
                     +finalQrscan+"/"
                     +finalName+"/"
@@ -149,24 +141,36 @@ public class RegisterScreen extends AppCompatActivity {
                     +finalCorreo1+"/"
                     +finalInfo+"/"
                     +finalComentario+"/"
-                    +finalAgrx;
+                    +finalAgrx;*/
 
-            WriteToFile(fileName,total_info_txt);
+            //WriteToFile(fileName,total_info_txt);
+
+            //Nueva Base de datos local
+            Boolean checkinsertData = db.insertuserData(finalLecturar,finalQrscan,finalName,finalEmpresa,finalTel,finalTel1,finalCorreo,finalCorreo1,finalInfo,finalComentario,finalAgrx);
+            if(checkinsertData == true){
+                guardadocorrecto();
+            }else{
+                guardadoincorrecto();
+            }
+
             startActivity(new Intent(RegisterScreen.this, ConsultScreen.class)
                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+
         }else {
             ProgressDialog progressDialog = ProgressDialog.show(this,
                     "Registrando nueva persona",
                     "Espere por favor",
                     true,
                     true);
+
             //Para registro Internet
             AsyncTask.execute(() -> {
                 try {
                     Retrofit retrofit = new Retrofit.Builder()
                             .addConverterFactory(ScalarsConverterFactory.create())
                             .addConverterFactory(GsonConverterFactory.create())
-                            .baseUrl("https://script.google.com/macros/s/AKfycbzBthnVWXEgfZCs9QceU9kY6Z7AByV7-IFHOR5hcDFIwpcHKX2BvxHSMg0kCZpdZ4R3/")
+                            .baseUrl("https://script.google.com/macros/s/AKfycbygLMqHzzl3lSU8lHvNYsviOdMOcYCLgcYL2GYXBGS3W8YCv5LqWp99i4S7uCWSE32wIg/")
                             .build();
 
                     IGoogleSheets iGoogleSheets = retrofit.create(IGoogleSheets.class);
@@ -200,6 +204,7 @@ public class RegisterScreen extends AppCompatActivity {
                     int code = response.code();
 
                     progressDialog.dismiss();
+
                     if (code == 200) {
                         startActivity(new Intent(RegisterScreen.this, ConsultScreen.class)
                                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -209,8 +214,8 @@ public class RegisterScreen extends AppCompatActivity {
                     e.printStackTrace();
                 }
             });
-            //Sin internet
-            total_info_txt = lastId+1 +"/"
+
+            /*total_info_txt = lastId+1 +"/"
                     +finalLecturar+"/"
                     +finalQrscan+"/"
                     +finalName+"/"
@@ -221,9 +226,17 @@ public class RegisterScreen extends AppCompatActivity {
                     +finalCorreo1+"/"
                     +finalInfo+"/"
                     +finalComentario+"/"
-                    +finalAgrx;
+                    +finalAgrx;*/
 
-            WriteToFile(fileName,total_info_txt);
+            //Nueva Base de datos local
+            Boolean checkinsertData = db.insertuserData(finalLecturar,finalQrscan,finalName,finalEmpresa,finalTel,finalTel1,finalCorreo,finalCorreo1,finalInfo,finalComentario,finalAgrx);
+            if(checkinsertData == true){
+                guardadocorrecto();
+            }else{
+                guardadoincorrecto();
+            }
+
+            //WriteToFile(fileName,total_info_txt);
         }
 }
 
@@ -237,10 +250,12 @@ public class RegisterScreen extends AppCompatActivity {
             return text;
     }
 
-    public void WriteToFile( String sFileName, String sBody) {
+    /*public void WriteToFile( String sFileName, String sBody) {
         try
         {
-            File root = new File(Environment.getExternalStorageDirectory(),Environment.DIRECTORY_DOCUMENTS);
+
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"BaseData");
+
             if (!root.exists())
             {
                 root.mkdir();
@@ -259,7 +274,7 @@ public class RegisterScreen extends AppCompatActivity {
             e.printStackTrace();
 
         }
-    }
+    }*/
 
     private boolean isConnected(){
 
@@ -270,6 +285,17 @@ public class RegisterScreen extends AppCompatActivity {
     private void guardadocorrecto(){
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.layoutbasedatalocal, (ViewGroup) findViewById(R.id.ll_toast));
+
+        Toast toast = new Toast((getApplicationContext()));
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0,200);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(view);
+        toast.show();
+    }
+
+    private void guardadoincorrecto(){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.layoutbasedatalocalerror, (ViewGroup) findViewById(R.id.ll_toast));
 
         Toast toast = new Toast((getApplicationContext()));
         toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0,200);

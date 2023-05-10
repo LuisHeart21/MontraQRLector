@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_toast"
+    android:orientation="horizontal"
+    android:background="@drawable/bgtoastbdinfo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center|center_horizontal"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_warning_24"
+        android:layout_marginEnd="10dp"
+        app:tint="@color/black" />
+    <TextView
+        android:id="@+id/txtmsgguardado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Sin información en Base de Datos Local"
+        android:textColor="@color/black"
+        android:elegantTextHeight="true"/>
+
+</LinearLayout>

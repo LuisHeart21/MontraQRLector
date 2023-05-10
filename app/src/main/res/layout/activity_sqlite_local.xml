@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SQLiteLocal"
+    android:background="@color/red"
+    android:padding="10dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:layout_marginBottom="100dp"
+        />
+    <ImageButton
+        android:id="@+id/btn_delete"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/baseline_delete_24"
+        android:scaleType="centerCrop"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/bg_button_home"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        app:tint="@color/black"/>
+    <ImageButton
+        android:id="@+id/btn_home"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/baseline_home_24"
+        android:scaleType="centerCrop"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/bg_button_home"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        app:tint="@color/black"/>
+
+
+</RelativeLayout>

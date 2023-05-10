@@ -66,10 +66,11 @@ public class ConsultScreen extends AppCompatActivity {
         bdlocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                startActivity(new Intent(ConsultScreen.this,LocalBaseDataActivity.class));
+                startActivity(new Intent(ConsultScreen.this,SQLiteLocal.class));
             }
         });
+
+
 
         coneccionreint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,4 +227,5 @@ public class ConsultScreen extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo()!= null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
     }
+
 }
