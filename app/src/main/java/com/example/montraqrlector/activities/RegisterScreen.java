@@ -1,6 +1,5 @@
 package com.example.montraqrlector.activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -21,6 +20,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.example.montraqrlector.R;
 import com.example.montraqrlector.models.IGoogleSheets;
 import com.example.montraqrlector.utilies.Common;
+import com.example.montraqrlector.utilies.CustomProgressDialog;
 import com.example.montraqrlector.utilies.Fecha;
 
 import retrofit2.Call;
@@ -158,11 +158,13 @@ public class RegisterScreen extends AppCompatActivity {
 
 
         }else {
-            ProgressDialog progressDialog = ProgressDialog.show(this,
+            CustomProgressDialog dialog = new CustomProgressDialog(RegisterScreen.this);
+            dialog.show();
+            /*ProgressDialog progressDialog = ProgressDialog.show(this,
                     "Registrando nueva persona",
                     "Espere por favor",
                     true,
-                    true);
+                    true);*/
 
             //Para registro Internet
             AsyncTask.execute(() -> {
@@ -203,7 +205,7 @@ public class RegisterScreen extends AppCompatActivity {
                     Response<String> response = call.execute();
                     int code = response.code();
 
-                    progressDialog.dismiss();
+                    dialog.dismiss();
 
                     if (code == 200) {
                         startActivity(new Intent(RegisterScreen.this, ConsultScreen.class)

@@ -11,4 +11,5 @@
     <color name="grisclaro">#DCDCDC</color>
     <color name="grisoscuro">#505050</color>
     <color name="verde">#00AC17</color>
+    <color name="transparent">#00000000</color>
 </resources>

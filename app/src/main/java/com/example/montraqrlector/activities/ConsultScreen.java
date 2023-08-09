@@ -21,6 +21,7 @@ import com.example.montraqrlector.adapters.PeopleAdapter;
 import com.example.montraqrlector.models.IGoogleSheets;
 import com.example.montraqrlector.models.People;
 import com.example.montraqrlector.utilies.Common;
+import com.example.montraqrlector.utilies.CustomProgressDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -75,11 +76,13 @@ public class ConsultScreen extends AppCompatActivity {
         coneccionreint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = ProgressDialog.show(ConsultScreen.this,
+                CustomProgressDialog dialog = new CustomProgressDialog(ConsultScreen.this);
+                dialog.show();
+                /*progressDialog = ProgressDialog.show(ConsultScreen.this,
                         "Esperando conexión",
                         "Espere por favor",
                         true,
-                        true);
+                        true);*/
                 recreate();
                 //finish();
                 //startActivity(getIntent());
@@ -107,11 +110,13 @@ public class ConsultScreen extends AppCompatActivity {
 
     private void loadDataFromGoogleSheets() {
         String pathUrl;
-        progressDialog = ProgressDialog.show(ConsultScreen.this,
+        CustomProgressDialog dialog = new CustomProgressDialog(ConsultScreen.this);
+        dialog.show();
+        /*progressDialog = ProgressDialog.show(ConsultScreen.this,
                 "Cargando resultados",
                 "Espere por favor",
                 true,
-                true);
+                true);*/
 
         try {
             pathUrl = "exec?spreadsheetId=" + Common.GOOGLE_SHEET_ID + "&sheet=" + Common.SHEET_NAME;
@@ -144,7 +149,7 @@ public class ConsultScreen extends AppCompatActivity {
                             peopleList.add(people);
 
                             setPeopleAdapter(peopleList);
-                            progressDialog.dismiss();
+                            dialog.dismiss();
                         }
 
                         size = peopleList.size();

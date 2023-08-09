@@ -129,7 +129,7 @@ public class SQLiteLocal extends AppCompatActivity {
         View view = layoutInflater.inflate(R.layout.layoutnoinfobd, (ViewGroup) findViewById(R.id.ll_toast));
 
         Toast toast = new Toast((getApplicationContext()));
-        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.BOTTOM, 0,200);
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.TOP, 0,200);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(view);
         toast.show();

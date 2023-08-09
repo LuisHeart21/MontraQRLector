@@ -82,4 +82,7 @@ dependencies {
     implementation('com.journeyapps:zxing-android-embedded:4.3.0')
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 }
